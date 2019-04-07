@@ -11,17 +11,23 @@ void mlm::WriteHeader(std::ofstream & file){
     file << "# DO NOT MODIFY THIS FILE\n";
 }
 
+
+void mlm::CreateConfigFile(std::string const& path, std::string const& content){
+    std::ofstream file;
+    file.open(path);
+    if(!file)ErrorAndExit("Error while creating config");
+    mlm::WriteHeader(file);
+    if(content != "") file << content;
+    file.close();
+}
+
 void mlm::GenerateConfig(){
     // pre: we don't need to check if a folder exists because
     // we are working inside a new dir
     auto conf_dir = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
     mlm::CreateDir(conf_dir);
-    std::ofstream info_file;
     // check if open fails!
-    info_file.open(mlm::JoinPaths(conf_dir, "info"), std::fstream::out);
-    if(!info_file)ErrorAndExit("Error while creating config");
-    mlm::WriteHeader(info_file);
-    info_file.close();
+    mlm::CreateConfigFile(mlm::JoinPaths(conf_dir, "info"));
 
     // Create .gitignore
     if(mlm::config[0] == '1'){
@@ -31,7 +37,7 @@ void mlm::GenerateConfig(){
         gitignore_file << "versioning/";
         gitignore_file.close();
     }
-
+    // crete config and versioning folders
     auto versioning_dir = mlm::JoinPaths(conf_dir, "versioning");
     auto models_dir = mlm::JoinPaths(versioning_dir, MODELS_DIR);
     auto test_dir = mlm::JoinPaths(versioning_dir, TEST_DIR);
@@ -43,25 +49,10 @@ void mlm::GenerateConfig(){
     mlm::CreateDir(models_dir);
 
     // generate other config files
-    std::ofstream other_conf;
-    other_conf.open(mlm::JoinPaths(models_dir, "info"));
-    if(!other_conf)ErrorAndExit("Error while creating config");
-    mlm::WriteHeader(other_conf);
-    other_conf << "# models config file";
-    other_conf << "0";
-    other_conf.close();
-    other_conf.open(mlm::JoinPaths(train_dir, "info"));
-    if(!other_conf)ErrorAndExit("Error while creating config");
-    mlm::WriteHeader(other_conf);
-    other_conf << "# train data config file";
-    other_conf << "0";
-    other_conf.close();
-    other_conf.open(mlm::JoinPaths(test_dir, "info"));
-    if(!other_conf)ErrorAndExit("Error while creating config");
-    mlm::WriteHeader(other_conf);
-    other_conf << "# test data config file";
-    other_conf << "0";
-    other_conf.close();
+    mlm::CreateConfigFile(mlm::JoinPaths(models_dir, "info"));
+    mlm::CreateConfigFile(mlm::JoinPaths(train_dir, "info"));
+    mlm::CreateConfigFile(mlm::JoinPaths(test_dir, "info"));
+
 
 }
 
@@ -192,7 +183,9 @@ void mlm::UpdateFiles(std::string const& file_type){
     }
     mlm::LoadGlobals();
     if(file_type == mlm::MODELS){
-
+        auto models_dir = mlm::JoinPaths(cwd.string(), MODELS_DIR);
+        for(auto& entry : boost::make_iterator_range(fs::directory_iterator(models_dir), {}))
+           std::cout << entry << "\n";
     }
     else if(file_type == mlm::DATA){
 

@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <boost/filesystem.hpp>
+#include <boost/range/iterator_range.hpp>
 
 #define CONFIG_DIR ".mlmconfig"
 
@@ -26,6 +27,7 @@ namespace mlm{
     void LoadGlobals();
     void Configure();
     void WriteHeader(std::ofstream & file);
+    void CreateConfigFile(std::string const& path, std::string const& content="");
     void DisplayVersioning(std::string const& file_type);
     std::string JoinPaths(std::string const& p1, std::string const& p2);
 
