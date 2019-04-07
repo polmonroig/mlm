@@ -16,8 +16,15 @@ void Version(){
 }
 
 
-void Help(){
-    std::ifstream help_file("help");
+void Help(std::string const& exec_dir){
+    std::string dir = "";
+    int i = exec_dir.size() - 1;
+    while(exec_dir[i--] != '/');
+    ++i;
+    for(int j = 0; j <= i; ++j){
+        dir += exec_dir[j];
+    }
+    std::ifstream help_file(dir + "help");
     std::string line;
     while(std::getline(help_file, line)){
         std::cout << line << std::endl;
