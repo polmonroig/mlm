@@ -175,17 +175,44 @@ void mlm::DisplayVersioning(std::string const& file_type){
     }
 }
 
+std::string mlm::TimetoString(std::time_t t){
+    char buff[20];
+    strftime(buff, 20, "%Y%m%d%H%M%S", localtime(&t));
+    return buff;
+}
+
 void mlm::UpdateFiles(std::string const& file_type){
-    auto cwd = fs::current_path();
-    auto conf_dir = mlm::JoinPaths(cwd.string(), CONFIG_DIR);
-    if(!fs::exists(conf_dir)){
-        mlm::ErrorAndExit("Coudn't find a project inside the current directory");
-    }
     mlm::LoadGlobals();
     if(file_type == mlm::MODELS){
-        auto models_dir = mlm::JoinPaths(cwd.string(), MODELS_DIR);
-        for(auto& entry : boost::make_iterator_range(fs::directory_iterator(models_dir), {}))
-           std::cout << entry << "\n";
+        auto conf_dir = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
+        // first we need to load the models in the current project
+        auto models_dir = mlm::JoinPaths(conf_dir, MODELS_DIR);
+        std::vector<fileType> files;
+        for(auto& entry : boost::make_iterator_range(fs::directory_iterator(models_dir), {})){
+            auto time = boost::filesystem::last_write_time(entry);
+
+            files.push_back(fileType(entry.path().filename().string(), mlm::TimetoString(time)));
+        }
+        for(auto& s : files){
+            std::cout << s.name << std::endl;
+            std::cout << s.time << std::endl;
+        }
+
+        // next we need to load the saved models and compare them with the new ones
+        std::fstream info_file;
+        info_file.open(mlm::JoinPaths(models_dir, "info"));
+        std::string name, time;
+        std::set<fileType> saved_files;
+        while(std::getline(info_file, name)){
+            if(name[0] != '#'){
+                std::getline(info_file, time);
+                saved_files.insert(saved_files.end(), fileType(name, time));
+            }
+        }
+        for(auto& s : files){
+
+        }
+        info_file.close();
     }
     else if(file_type == mlm::DATA){
 

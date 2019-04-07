@@ -1,10 +1,11 @@
 # mlm #
 
-This repository was created to save the developement of a machine algorithm that solves the LANL Earthquake Prediction kaggle research contest
+This is the repository for my Machine Learning Project Manager
 
 ### Prerequisites ###
 
-    c++
+    c++ >= 17
+    boost
 
 ### Who do I talk to? ###
 

@@ -6,6 +6,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
+#include <utility>
+#include <ctime>
 #include <boost/filesystem.hpp>
 #include <boost/range/iterator_range.hpp>
 
@@ -29,7 +32,9 @@ namespace mlm{
     void WriteHeader(std::ofstream & file);
     void CreateConfigFile(std::string const& path, std::string const& content="");
     void DisplayVersioning(std::string const& file_type);
+    std::string TimetoString(std::time_t t);
     std::string JoinPaths(std::string const& p1, std::string const& p2);
+
 
 
     // global variables
@@ -46,6 +51,32 @@ namespace mlm{
     std::string const DATA_DIR = "data/";
     std::string const TRAIN_DIR = "data/train/";
     std::string const TEST_DIR = "data/test/";
+
+
+    // types
+
+    struct fileType{
+        // variables
+        std::string name;
+        std::string time;
+
+        // constructor
+        fileType(std::string const& s, std::string const& t){
+            name = s;
+            time = t;
+        }
+
+
+        // operator
+        bool operator<(const fileType& file) const {
+            return name < file.name || time < file.time;
+        }
+
+        bool operator==(const fileType& file) const {
+            return name == file.name || file.time == time;
+        }
+    };
+
 
 }
 
