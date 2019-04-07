@@ -1,0 +1,7 @@
+Usage: ml_manager [options]
+Options:
+    --help                   Display this information.
+    --version                Display manager version information.
+    --new <name> <directory> Create new project.
+    --add <path>             Add a new file to the project.
+    --setconf                Set default config for new projects

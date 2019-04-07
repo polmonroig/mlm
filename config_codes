@@ -1,0 +1,7 @@
+Config Codes
+5 actions
+2 digits per action
+
+0000000000 -> default init
+01xxxxxxxx -> Git created
+02xxxxxxxx -> Git not created
