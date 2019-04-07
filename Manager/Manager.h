@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <list>
 #include <utility>
 #include <ctime>
 #include <boost/filesystem.hpp>
@@ -59,11 +60,17 @@ namespace mlm{
         // variables
         std::string name;
         std::string time;
+        int version;
 
         // constructor
-        fileType(std::string const& s, std::string const& t){
+        fileType(std::string const& s, std::string const& t, int v){
             name = s;
             time = t;
+            version = v;
+        }
+
+        void SetVersion(int v){
+            version = v;
         }
 
 
@@ -72,8 +79,12 @@ namespace mlm{
             return name < file.name || time < file.time;
         }
 
+        bool operator>(const fileType& file) const {
+            return name > file.name || time > file.time;
+        }
+
         bool operator==(const fileType& file) const {
-            return name == file.name || file.time == time;
+            return name == file.name && file.time == time;
         }
     };
 

@@ -1,2 +1,5 @@
+Config codes
 0xxxxxxxxx -> do not create git
 1xxxxxxxxx -> create git
+x0xxxxxxxx -> do not create data folder
+x1xxxxxxxx -> create data folder
