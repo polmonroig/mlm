@@ -1,10 +1,10 @@
-Usage: ml_manager [options]
+Usage: mlm [options]
 Options:
     --help                   Display this information.
     --version                Display manager version information.
-    --new <name> <directory> Create new project.
-    --update <filetype>      Keeps track of selected filetypes.
     --setconf                Set default config for new projects
-    --diplay <filetype>      Display selected files and their versions               
+    display <filetype>      Display selected files and their versions
+    new <name> <directory> Create new project.
+    push <filetype>      Keeps track of selected filetypes.
 
 Filetypes include: models, data, all

@@ -14,6 +14,7 @@
 #include <boost/range/iterator_range.hpp>
 
 #define CONFIG_DIR ".mlmconfig"
+#define CONFIG_LEN 10
 
 namespace fs = boost::filesystem;
 
@@ -23,7 +24,7 @@ namespace fs = boost::filesystem;
 namespace mlm{
     // functions declaration
     void CreateProject(std::string const& name, std::string const& dir, bool default_config);
-    void UpdateFiles(std::string const& file_type);
+    void PushFiles(std::string const& file_type);
     void GenerateConfig();
     void ErrorAndExit(std::string const& error);
     void CreateDir(std::string const& dir);
@@ -33,6 +34,8 @@ namespace mlm{
     void WriteHeader(std::ofstream & file);
     void CreateConfigFile(std::string const& path, std::string const& content="");
     void DisplayVersioning(std::string const& file_type);
+    void PushModels();
+    void SetModelVersion(int v);
     std::string TimetoString(std::time_t t);
     std::string JoinPaths(std::string const& p1, std::string const& p2);
 
@@ -76,11 +79,13 @@ namespace mlm{
 
         // operator
         bool operator<(const fileType& file) const {
-            return name < file.name || time < file.time;
+            if(name != file.name)return name < file.name;
+            else return time < file.time;
         }
 
         bool operator>(const fileType& file) const {
-            return name > file.name || time > file.time;
+            if(name != file.name)return name > file.name;
+            else return time > file.time;
         }
 
         bool operator==(const fileType& file) const {
