@@ -33,17 +33,17 @@ void mlm::GenerateConfig(){
     if(mlm::config[0] == '1'){
         std::ofstream gitignore_file;
         gitignore_file.open(mlm::JoinPaths(conf_dir, ".gitignore"), std::fstream::out);
-        gitignore_file << "# backup and versioning";
-        gitignore_file << "versioning/";
+        gitignore_file << "# backup and backup";
+        gitignore_file << "backup/";
         gitignore_file.close();
     }
-    // crete config and versioning folders
-    auto versioning_dir = mlm::JoinPaths(conf_dir, "versioning");
-    auto models_dir = mlm::JoinPaths(versioning_dir, MODELS_DIR);
-    auto test_dir = mlm::JoinPaths(versioning_dir, TEST_DIR);
-    auto train_dir = mlm::JoinPaths(versioning_dir, TRAIN_DIR);
-    mlm::CreateDir(versioning_dir);
-    mlm::CreateDir(mlm::JoinPaths(versioning_dir, DATA_DIR));
+    // crete config and backup folders
+    auto models_dir = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto test_dir = mlm::JoinPaths(mlm::backup_path, TEST_DIR);
+    auto train_dir = mlm::JoinPaths(mlm::backup_path, TRAIN_DIR);
+    auto data_dir = mlm::JoinPaths(mlm::backup_path, DATA_DIR);
+    mlm::CreateDir(mlm::backup_path);
+    mlm::CreateDir(data_dir);
     mlm::CreateDir(train_dir);
     mlm::CreateDir(test_dir);
     mlm::CreateDir(models_dir);
@@ -104,6 +104,8 @@ void mlm::CreateProject(std::string const& name, std::string const& dir, bool de
         conf_file.open("default_config");
         if(!conf_file)ErrorAndExit("Error while creating config");
         // set default config
+        mlm::backup_path = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
+        mlm::backup_path = mlm::JoinPaths(mlm::backup_path, "backup/");
         std::getline(conf_file, config);
         conf_file.close();
     }
@@ -134,10 +136,11 @@ void mlm::LoadGlobals(){
     if(!fs::exists(conf_dir)){
         mlm::ErrorAndExit("Coudn't find a project inside the current directory");
     }
-    std::vector<std::string> variables(3);
+    auto n_variables = 4;
+    std::vector<std::string> variables(n_variables);
     int i = 0;
     std::ifstream info_file(mlm::JoinPaths(conf_dir, "info"));
-    while(i < 3){
+    while(i < n_variables){
         std::string line;
         std::getline(info_file, line);
         if(line[0] != '#'){
@@ -148,6 +151,7 @@ void mlm::LoadGlobals(){
     mlm::config = variables[0];
     mlm::project_name = variables[1];
     mlm::project_path = variables[2];
+    mlm::backup_path = variables[3];
 
 }
 
@@ -159,6 +163,7 @@ void mlm::SaveGlobals(){
     info_file << mlm::config << '\n';
     info_file << mlm::project_name << '\n';
     info_file << mlm::project_path << '\n';
+    info_file << mlm::backup_path << '\n';
 
     info_file.close();
 }
@@ -166,11 +171,9 @@ void mlm::SaveGlobals(){
 void mlm::DisplayVersioning(std::string const& file_type){
     mlm::LoadGlobals();
     if(file_type == mlm::MODELS){
-        auto versioning_dir = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
-        versioning_dir = mlm::JoinPaths(versioning_dir, "versioning/");
-        versioning_dir = mlm::JoinPaths(versioning_dir, MODELS_DIR);
+        auto backup_models = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
         std::ifstream in_file;
-        in_file.open(mlm::JoinPaths(versioning_dir, "info"));
+        in_file.open(mlm::JoinPaths(backup_models, "info"));
         std::string name, time, ver;
         while(std::getline(in_file, name)){
             if(name[0] != '#'){
@@ -217,55 +220,58 @@ void mlm::SetModelVersion(int v){
     }
 }
 
-void mlm::PushModels(){
-    // first we need to load the models in the current project
-    if(mlm::config[CONFIG_LEN - 1] == '0' && mlm::config[CONFIG_LEN - 2] == '0'){
-        mlm::config[CONFIG_LEN - 1] = '1';
-    }
-    auto models_dir = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
-    std::set<fileType> files;
-    for(auto& entry : boost::make_iterator_range(fs::directory_iterator(models_dir), {})){
+
+std::set<mlm::fileType> mlm::GetFiles(std::string const& path){
+    std::set<mlm::fileType> files;
+    for(auto& entry : boost::make_iterator_range(fs::directory_iterator(path), {})){
         auto time = boost::filesystem::last_write_time(entry);
         files.insert(files.end(), fileType(entry.path().filename().string(), mlm::TimetoString(time), 1));
     }
-    // next we need to load the saved models and compare them with the new ones
-    auto versioning_dir = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
-    versioning_dir = mlm::JoinPaths(versioning_dir, "versioning/");
-    versioning_dir = mlm::JoinPaths(versioning_dir, MODELS_DIR);
-    std::ifstream in_file;
-    in_file.open(mlm::JoinPaths(versioning_dir, "info"));
+    return files;
+}
+
+std::list<mlm::fileType> mlm::GetInfoFiles(std::string const& path){
+    std::ifstream input_file;
+    input_file.open(path);
     std::string name, time, ver;
-    std::list<fileType> saved_files;
-    while(std::getline(in_file, name)){
+    std::list<mlm::fileType> files;
+    while(std::getline(input_file, name)){
         if(name[0] != '#'){
-            std::getline(in_file, time);
-            std::getline(in_file, ver);
-            saved_files.insert(saved_files.end(), fileType(name, time, std::stoi(ver)));
+            std::getline(input_file, time);
+            std::getline(input_file, ver);
+            files.insert(files.end(), fileType(name, time, std::stoi(ver)));
         }
     }
-    in_file.close();
-    bool uptodate = true;
-    auto it = saved_files.begin();
+    input_file.close();
+    return files;
+}
+
+void mlm::UpdateInfoFiles(std::set<mlm::fileType> const& files, std::list<mlm::fileType>& info_files){
+    auto models_dir = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
+    bool uptodate = true; // keeps track if there is a new model
+    auto it = info_files.begin();
     for(auto s : files){
         bool found = false;
         // loop until correct pos is found
-        while(it != saved_files.end() && !found){
+        while(it != info_files.end() && !found){
             if(s > *it)++it;
             else if(s == *it)found = true;
             else break;
         }
         // case inserting a new version
         --it;
-        if(!found && it != saved_files.end() && it->name == s.name){
+        if(!found && it != info_files.end() && it->name == s.name){
             mlm::SetModelVersion(it->version);
             s.version = it->version + 1;
-            saved_files.insert(++it, s);
+            mlm::AddModel(mlm::JoinPaths(models_dir, s.name), s.name, s.version);
+            info_files.insert(++it, s);
             std::cout << s.name << " updated" << std::endl;
             uptodate = false;
         }
         else if(!found){
             ++it;
-            saved_files.insert(it, s);
+            mlm::AddModel(mlm::JoinPaths(models_dir, s.name),s.name,  s.version);
+            info_files.insert(it, s);
             std::cout << s.name << " added" << std::endl;
             uptodate = false;
         }
@@ -274,15 +280,43 @@ void mlm::PushModels(){
         }
     }
     if(uptodate)std::cout << "All your models are already up to date!" << std::endl;
+}
+
+void mlm::SaveFilesToInfo(std::list<mlm::fileType> const& files, std::string const& path){
     std::ofstream out_file;
-    out_file.open(mlm::JoinPaths(versioning_dir, "info"));
+    out_file.open(path);
     mlm::WriteHeader(out_file);
-    it = saved_files.begin();
-    while(it != saved_files.end()){
+    auto it = files.begin();
+    while(it != files.end()){
         out_file << it->name << '\n' << it->time << '\n' << it->version << '\n';
         ++it;
     }
     out_file.close();
+}
+
+void mlm::PushModels(){
+    // first we need to load the models in the current project
+    auto models_dir = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
+    auto files = mlm::GetFiles(models_dir);
+
+    // next we need to load the saved models
+    auto models_backup = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto saved_files = mlm::GetInfoFiles(mlm::JoinPaths(models_backup, "info"));
+
+    // then add the models new models to the saved ones
+    mlm::UpdateInfoFiles(files, saved_files);
+
+    // save the models list to backup info file
+    mlm::SaveFilesToInfo(saved_files, mlm::JoinPaths(models_backup, "info"));
+}
+
+void mlm::AddModel(std::string const& source_path, std::string const& model_name, int model_version){
+    auto destination_path = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    destination_path = mlm::JoinPaths(destination_path, std::to_string(model_version));
+    if(!fs::exists(destination_path)){
+        mlm::CreateDir(destination_path);
+    }
+    fs::copy_file(source_path, mlm::JoinPaths(destination_path, model_name));
 }
 
 void mlm::PushFiles(std::string const& file_type){
