@@ -131,8 +131,10 @@ void mlm::CreateProject(std::string const& name, std::string const& dir, bool de
 }
 
 void mlm::LoadGlobals(){
-    auto cwd = fs::current_path();
-    auto conf_dir = mlm::JoinPaths(cwd.string(), CONFIG_DIR);
+
+    //auto cwd = fs::current_path();
+    //auto conf_dir = mlm::JoinPaths(cwd.string(), CONFIG_DIR);
+    auto conf_dir = mlm::JoinPaths("/home/polmonroig/Documents/mlm/project/", CONFIG_DIR);
     if(!fs::exists(conf_dir)){
         mlm::ErrorAndExit("Coudn't find a project inside the current directory");
     }
@@ -197,7 +199,7 @@ void mlm::DisplayVersioning(std::string const& file_type){
 
 std::string mlm::TimetoString(std::time_t t){
     char buff[20];
-    strftime(buff, 20, "%Y%m%d%H%M%S", localtime(&t));
+    strftime(buff, 20, "%Y%m%d %H%M%S", localtime(&t));
     return buff;
 }
 
@@ -335,4 +337,152 @@ void mlm::PushFiles(std::string const& file_type){
     }
     // finally save global variables
     mlm::SaveGlobals();
+}
+
+std::list<mlm::fileType> mlm::GetSavedModels(std::string const& path){
+
+    auto pos = CONFIG_LEN - 2;
+    std::string s_version = std::to_string(mlm::config[pos] - '0') + std::to_string(mlm::config[pos + 1] - '0');
+    int i_version =  std::stoi(s_version);
+    std::ifstream input_file, check_file;
+
+    // create files
+    input_file.open(mlm::JoinPaths(path, "info"));
+    check_file.open(mlm::JoinPaths(path, "info"));
+    if(input_file.fail() || check_file.fail()){
+        mlm::ErrorAndExit("Error while opening file");
+    }
+    // create temporal fileType variables
+    std::string name, time, ver;
+    std::string tmp_version, tmp_name, tmp_time;
+    // advance second iterator
+    std::getline(check_file, tmp_name);
+    while(tmp_name[0] == '#')std::getline(check_file, tmp_name);
+    std::getline(check_file, tmp_time);
+    std::getline(check_file, tmp_version);
+
+    // iterate through file
+    std::list<mlm::fileType> files;
+    bool first = true;
+    while(std::getline(input_file, name)){
+        if(name[0] != '#'){
+            std::getline(input_file, time);
+            std::getline(input_file, ver);
+
+            std::getline(check_file, tmp_name);
+            std::getline(check_file, tmp_time);
+            while(std::getline(check_file, tmp_version) && tmp_version != "1"){
+                std::getline(input_file, name);
+                std::getline(input_file, time);
+                std::getline(input_file, ver);
+                std::getline(check_file, tmp_name);
+                std::getline(check_file, tmp_time);
+                ver = tmp_version;
+            }
+            files.insert(files.end(), fileType(name, time, std::stoi(ver)));
+        }
+    }
+    input_file.close();
+    return files;
+}
+
+void mlm::PullModels(){
+    // load backup models
+    auto models_backup = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto saved_models = mlm::GetSavedModels(models_backup);
+
+    // load models of the current project
+    auto models_dir = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
+    auto files = mlm::GetFiles(models_dir);
+    auto it = files.begin();
+
+
+
+    for(auto const& f : saved_models){
+        if(it != files.end() && it->name < f.name){
+            ++it;// file has not been tracked
+        }
+        else if(it != files.end() && it->name == f.name){
+            if(it->time < f.time){ // currently using an old version
+                if(true){ // force flag is active
+                    // copy file
+                    auto p = mlm::JoinPaths(models_backup, std::to_string(f.version));
+                    p = mlm::JoinPaths(p, f.name);
+                    fs::copy_file(p, mlm::JoinPaths(models_dir, it->name));
+                    // change timestape for file verification
+
+                    struct std::tm tm = {0};
+                    std::istringstream ss(f.time);
+                    ss >> std::get_time(&tm, "%Y%m%d %H%M%S");
+                    tm.tm_isdst=-1;
+                    std::time_t time = timegm(&tm);
+                    fs::last_write_time(mlm::JoinPaths(models_dir, it->name), time);
+                }
+                else { // force replace flag is inactive
+
+                }
+            }
+            else if(it->time > f.time){
+                std::cout << "Warning: you are currently using a newer version of "
+                << it->name << ", use push to update" << std::endl;
+            }
+            else{
+            }
+            ++it;
+        }
+        else{
+            auto p = mlm::JoinPaths(models_backup, std::to_string(f.version));
+            p = mlm::JoinPaths(p, f.name);
+            fs::copy_file(p, mlm::JoinPaths(models_dir, f.name));
+            struct std::tm tm;
+            std::istringstream ss(f.time);
+            ss >> std::get_time(&tm, "%Y%m%d %H%M%S");
+            tm.tm_isdst=-1;
+            time_t time = std::mktime(&tm);
+            fs::last_write_time(mlm::JoinPaths(models_dir, f.name), time);
+
+        }
+    }
+}
+
+
+void mlm::PullFiles(std::string const& file_type){
+    mlm::LoadGlobals();
+    if(file_type == mlm::MODELS){
+        mlm::PullModels();
+    }
+    else if(file_type == mlm::DATA){
+
+    }
+    else if(file_type == mlm::ALL){
+        mlm::PullModels();
+    }
+    else{
+        ErrorAndExit("Unknown file type");
+    }
+    // finally save global variables
+    mlm::SaveGlobals();
+}
+
+void mlm::Verify(){
+    /*mlm::LoadGlobals();
+    auto models_dir = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto files = mlm::GetFiles();
+
+    int max_version = mlm::
+
+
+    auto models_backup = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto saved_files = mlm::GetInfoFiles(mlm::JoinPaths(models_backup, "info"));
+    std::list<f>
+    for(auto const& reg : saved_files){
+        for(auto const& file : files){
+            if(file != reg){
+                std::cout << ""
+            }
+        }-
+    }
+
+*/
+
 }

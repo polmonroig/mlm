@@ -10,6 +10,7 @@
 #include <list>
 #include <utility>
 #include <ctime>
+#include <iomanip>
 #include <boost/filesystem.hpp>
 #include <boost/range/iterator_range.hpp>
 
@@ -80,6 +81,10 @@ namespace mlm{
     void SaveFilesToInfo(std::list<fileType> const& files, std::string const& path);
     std::string TimetoString(std::time_t t);
     std::string JoinPaths(std::string const& p1, std::string const& p2);
+    void Verify();
+    void PullFiles(std::string const& file_type);
+    void PullModels();
+    std::list<fileType> GetSavedModels(std::string const& path);
 
 
 

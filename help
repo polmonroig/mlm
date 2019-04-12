@@ -3,9 +3,10 @@ Usage: mlm  [--version] [--help]
 
 This are the mlm commands:
 
-    setconf                 Set default config for new projects
-    display <filetype>      Display selected files and their versions
+    setconf                 Set default config for new projects.
+    display <filetype>      Display selected files and their versions.
     new <name> <directory>  Create new project.
     push <filetype>         Keeps track of selected filetypes.
+    verify                  Verifies that all backup models are correct.
 
 Filetypes include: models, data, all

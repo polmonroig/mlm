@@ -26,6 +26,13 @@ int main(int argc, char* argv[]){
         if(argc != 3)EmptyEntry();
         mlm::DisplayVersioning(argv[2]);
     }
+    else if(argument == "verify"){
+        mlm::Verify();
+    }
+    else if(argument == "pull"){
+        //if(argc != 3)EmptyEntry();
+        mlm::PullFiles("models");
+    }
     else{
         EmptyEntry();
     }
