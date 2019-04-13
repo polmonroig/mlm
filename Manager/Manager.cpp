@@ -1,23 +1,27 @@
+/** @file Manager.cpp
+ *  @author Pol Monroig
+ * */
+
 #include "Manager.h"
 
 
 void mlm::ErrorAndExit(std::string const& error){
     std::cerr << error << std::endl;
-    exit(1);
+    exit(EXIT_FAILURE);
 }
 
-void mlm::WriteHeader(std::ofstream & file){
+void mlm::WriteHeader(fs::ofstream & file){
     file << "# File generated using ML Project Manager\n";
     file << "# DO NOT MODIFY THIS FILE\n";
 }
 
 
 void mlm::CreateConfigFile(std::string const& path, std::string const& content){
-    std::ofstream file;
+    fs::ofstream file;
     file.open(path);
     if(!file)ErrorAndExit("Error while creating config");
     mlm::WriteHeader(file);
-    if(content != "") file << content;
+    if(!content.empty()) file << content;
     file.close();
 }
 
@@ -31,10 +35,10 @@ void mlm::GenerateConfig(){
 
     // Create .gitignore
     if(mlm::config[0] == '1'){
-        std::ofstream gitignore_file;
-        gitignore_file.open(mlm::JoinPaths(conf_dir, ".gitignore"), std::fstream::out);
-        gitignore_file << "# backup and backup";
-        gitignore_file << "backup/";
+        fs::ofstream gitignore_file;
+        gitignore_file.open(mlm::JoinPaths(mlm::project_path, ".gitignore"));
+        gitignore_file << "# mlm\n";
+        gitignore_file << CONFIG_DIR"/";
         gitignore_file.close();
     }
     // crete config and backup folders
@@ -71,6 +75,7 @@ void mlm::CreateDir(std::string const& dir){
 }
 
 void mlm::Configure(){
+    std::cout << "Manual configure enabled" << std::endl;
     char answer;
     std::cout << "Do you want to create a git repository?[y/n] ";
     std::cin >> answer;
@@ -78,31 +83,50 @@ void mlm::Configure(){
     std::cout << "Do you want to create a data folder?[y/n] ";
     std::cin >> answer;
     if(answer == 'y')mlm::config[1] = '1';
+    std::string path;
+    while(path.empty() or !fs::exists(path)){
+        std::cout << "Where do you want the backup directory? (write default for default)";
+        std::cin >> path;
+        if(path == "default"){
+            path = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
+            break;
+        }
+    }
+    mlm::backup_path = mlm::JoinPaths(path, "backup/");
+
+
 }
 
 void mlm::CreateProject(std::string const& name, std::string const& dir, bool default_config){
+
+    // set global variables
+    mlm::project_name = name;
+    mlm::default_config = default_config;
+    std::string abs_dir = fs::absolute(fs::path(dir)).string();
+    abs_dir.pop_back();
+    mlm::project_path = mlm::JoinPaths(abs_dir, project_name);
 
     // check if project is viable
     if(!fs::exists(dir)){
         mlm::ErrorAndExit("The specified directory does not exist");
     }
     if(fs::exists(mlm::project_path)){
-        mlm::ErrorAndExit("Cannot create project, specified directory already exists");
+        std::cout << "The specified directory already exists." << std::endl
+                  << "Continue?[y/n]" << std::endl;
+        char c;
+        std::cin >> c;
+        if(c != 'y')exit(EXIT_FAILURE);
+    }
+    else{
+        // create project main folder
+        mlm::CreateDir(mlm::project_path);
     }
 
 
-
-    // set global variables
-    mlm::project_name = name;
-    mlm::default_config = default_config;
-    std::string abs_dir  = fs::absolute(fs::path(dir)).string();
-    abs_dir.pop_back();
-    mlm::project_path = mlm::JoinPaths(abs_dir, project_name);
-
     if(mlm::default_config){
-        std::ifstream conf_file;
+        fs::ifstream conf_file;
         conf_file.open("default_config");
-        if(!conf_file)ErrorAndExit("Error while creating config");
+        if(conf_file.fail())ErrorAndExit("Error while creating file");
         // set default config
         mlm::backup_path = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
         mlm::backup_path = mlm::JoinPaths(mlm::backup_path, "backup/");
@@ -114,8 +138,7 @@ void mlm::CreateProject(std::string const& name, std::string const& dir, bool de
     }
 
 
-    // create project main folder
-    mlm::CreateDir(mlm::project_path);
+
 
     // generate config files
     mlm::GenerateConfig();
@@ -125,7 +148,6 @@ void mlm::CreateProject(std::string const& name, std::string const& dir, bool de
     mlm::CreateDir(mlm::JoinPaths(mlm::project_path, TRAIN_DIR));
     mlm::CreateDir(mlm::JoinPaths(mlm::project_path, TEST_DIR));
     mlm::CreateDir(mlm::JoinPaths(mlm::project_path, MODELS_DIR));
-
     mlm::SaveGlobals();
 
 }
@@ -141,7 +163,7 @@ void mlm::LoadGlobals(){
     auto n_variables = 4;
     std::vector<std::string> variables(n_variables);
     int i = 0;
-    std::ifstream info_file(mlm::JoinPaths(conf_dir, "info"));
+    fs::ifstream info_file(mlm::JoinPaths(conf_dir, "info"));
     while(i < n_variables){
         std::string line;
         std::getline(info_file, line);
@@ -159,8 +181,9 @@ void mlm::LoadGlobals(){
 
 void mlm::SaveGlobals(){
     auto conf_dir = mlm::JoinPaths(mlm::project_path, CONFIG_DIR);
-    std::ofstream info_file;
+    fs::ofstream info_file;
     info_file.open(mlm::JoinPaths(conf_dir, "info"));
+    if(info_file.fail())ErrorAndExit("Error while opening file");
     mlm::WriteHeader(info_file);
     info_file << mlm::config << '\n';
     info_file << mlm::project_name << '\n';
@@ -174,8 +197,9 @@ void mlm::DisplayVersioning(std::string const& file_type){
     mlm::LoadGlobals();
     if(file_type == mlm::MODELS){
         auto backup_models = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
-        std::ifstream in_file;
+        fs::ifstream in_file;
         in_file.open(mlm::JoinPaths(backup_models, "info"));
+        if(in_file.fail())ErrorAndExit("Error while opening file");
         std::string name, time, ver;
         while(std::getline(in_file, name)){
             if(name[0] != '#'){
@@ -233,8 +257,9 @@ std::set<mlm::fileType> mlm::GetFiles(std::string const& path){
 }
 
 std::list<mlm::fileType> mlm::GetInfoFiles(std::string const& path){
-    std::ifstream input_file;
+    fs::ifstream input_file;
     input_file.open(path);
+    if(input_file.fail())ErrorAndExit("Error while opening file");
     std::string name, time, ver;
     std::list<mlm::fileType> files;
     while(std::getline(input_file, name)){
@@ -285,7 +310,7 @@ void mlm::UpdateInfoFiles(std::set<mlm::fileType> const& files, std::list<mlm::f
 }
 
 void mlm::SaveFilesToInfo(std::list<mlm::fileType> const& files, std::string const& path){
-    std::ofstream out_file;
+    fs::ofstream out_file;
     out_file.open(path);
     mlm::WriteHeader(out_file);
     auto it = files.begin();
@@ -344,7 +369,7 @@ std::list<mlm::fileType> mlm::GetSavedModels(std::string const& path){
     auto pos = CONFIG_LEN - 2;
     std::string s_version = std::to_string(mlm::config[pos] - '0') + std::to_string(mlm::config[pos + 1] - '0');
     int i_version =  std::stoi(s_version);
-    std::ifstream input_file, check_file;
+    fs::ifstream input_file, check_file;
 
     // create files
     input_file.open(mlm::JoinPaths(path, "info"));
@@ -404,7 +429,7 @@ void mlm::PullModels(){
         }
         else if(it != files.end() && it->name == f.name){
             if(it->time < f.time){ // currently using an old version
-                if(true){ // force flag is active
+                if(force_overwrite){ // force flag is active
                     // copy file
                     auto p = mlm::JoinPaths(models_backup, std::to_string(f.version));
                     p = mlm::JoinPaths(p, f.name);
@@ -417,9 +442,6 @@ void mlm::PullModels(){
                     tm.tm_isdst=-1;
                     std::time_t time = timegm(&tm);
                     fs::last_write_time(mlm::JoinPaths(models_dir, it->name), time);
-                }
-                else { // force replace flag is inactive
-
                 }
             }
             else if(it->time > f.time){
@@ -446,8 +468,9 @@ void mlm::PullModels(){
 }
 
 
-void mlm::PullFiles(std::string const& file_type){
+void mlm::PullFiles(std::string const &file_type, bool force) {
     mlm::LoadGlobals();
+    mlm::force_overwrite = force;
     if(file_type == mlm::MODELS){
         mlm::PullModels();
     }
@@ -464,25 +487,3 @@ void mlm::PullFiles(std::string const& file_type){
     mlm::SaveGlobals();
 }
 
-void mlm::Verify(){
-    /*mlm::LoadGlobals();
-    auto models_dir = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
-    auto files = mlm::GetFiles();
-
-    int max_version = mlm::
-
-
-    auto models_backup = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
-    auto saved_files = mlm::GetInfoFiles(mlm::JoinPaths(models_backup, "info"));
-    std::list<f>
-    for(auto const& reg : saved_files){
-        for(auto const& file : files){
-            if(file != reg){
-                std::cout << ""
-            }
-        }-
-    }
-
-*/
-
-}

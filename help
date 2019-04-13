@@ -7,6 +7,5 @@ This are the mlm commands:
     display <filetype>      Display selected files and their versions.
     new <name> <directory>  Create new project.
     push <filetype>         Keeps track of selected filetypes.
-    verify                  Verifies that all backup models are correct.
 
 Filetypes include: models, data, all

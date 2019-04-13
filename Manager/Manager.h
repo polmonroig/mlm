@@ -1,3 +1,10 @@
+/** @file Manager.h
+ *  @author Pol Monroig
+ *  @brief This is the Manager header, it defines all the
+ *         functions that create the interaction with the user
+ * */
+
+
 #ifndef MANAGER_H
 #define MANAGER_H
 
@@ -21,7 +28,12 @@ namespace fs = boost::filesystem;
 
 
 
-// define manager functions and procedures
+/** @namespace This is the Machine Learning Manager aka "mlm"
+ *
+ *  @brief This namespace saves all the procedures
+ *         used by the mlm application, it also includes some global
+ *         functions that are loaded when the program starts
+ * */
 namespace mlm{
 
 
@@ -37,9 +49,6 @@ namespace mlm{
         fileType(std::string const& s, std::string const& t, int v){
             name = s;
             time = t;
-            version = v;
-        }
-        void SetVersion(int v){
             version = v;
         }
 
@@ -62,6 +71,7 @@ namespace mlm{
 
     // functions declaration
     void CreateProject(std::string const& name, std::string const& dir, bool default_config);
+    std::string JoinPaths(std::string const& p1, std::string const& p2);
     void PushFiles(std::string const& file_type);
     void GenerateConfig();
     void ErrorAndExit(std::string const& error);
@@ -69,7 +79,7 @@ namespace mlm{
     void SaveGlobals();
     void LoadGlobals();
     void Configure();
-    void WriteHeader(std::ofstream & file);
+    void WriteHeader(fs::ofstream & file);
     void CreateConfigFile(std::string const& path, std::string const& content="");
     void DisplayVersioning(std::string const& file_type);
     void PushModels();
@@ -80,9 +90,7 @@ namespace mlm{
     void UpdateInfoFiles(std::set<fileType> const& files, std::list<fileType>& info_files);
     void SaveFilesToInfo(std::list<fileType> const& files, std::string const& path);
     std::string TimetoString(std::time_t t);
-    std::string JoinPaths(std::string const& p1, std::string const& p2);
-    void Verify();
-    void PullFiles(std::string const& file_type);
+    void PullFiles(std::string const &file_type, bool force);
     void PullModels();
     std::list<fileType> GetSavedModels(std::string const& path);
 
@@ -94,6 +102,7 @@ namespace mlm{
     inline std::string backup_path;
     inline std::string config;
     inline bool default_config;
+    inline bool force_overwrite;
 
     // constants
     std::string const MODELS = "models";
@@ -103,9 +112,6 @@ namespace mlm{
     std::string const DATA_DIR = "data/";
     std::string const TRAIN_DIR = "data/train/";
     std::string const TEST_DIR = "data/test/";
-
-
-
 
 
 }

@@ -1,3 +1,9 @@
+/** @file utils.h
+ *   *  @author Pol Monroig
+ *  @brief This is the utils header, iit just defines some
+ *         small and auxiliar functions
+ * */
+
 #ifndef UTILS_H
 #define UTILS_H
 
@@ -8,17 +14,17 @@
 #include <fstream>
 #include <string>
 
-#define STD_EXIT_CODE 1
 
+///@brief Version
 void Version(){
-    std::cout << "ML Project Manager 1.0" << std::endl;
-    exit(STD_EXIT_CODE);
+    std::cout << "ML Project Manager 0.0.9.5" << std::endl;
+    exit(EXIT_SUCCESS);
 }
 
 
 void Help(std::string const& exec_dir){
     std::string dir = "";
-    int i = exec_dir.size() - 1;
+    auto i = exec_dir.size() - 1;
     while(exec_dir[i--] != '/');
     ++i;
     for(int j = 0; j <= i; ++j){
@@ -30,17 +36,17 @@ void Help(std::string const& exec_dir){
         std::cout << line << std::endl;
     }
     help_file.close();
-    exit(STD_EXIT_CODE);
+    exit(EXIT_SUCCESS);
 }
 
 void EmptyEntry(){
     std::cout << "No such command. Please use ml_manager --help" << std::endl;
-    exit(STD_EXIT_CODE);
+    exit(EXIT_FAILURE);
 }
 
 void InvalidEntry(std::string entry){
     std::cout << "No such command:" + entry + "Please use ml_manager --help" << std::endl;
-    exit(STD_EXIT_CODE);
+    exit(EXIT_FAILURE);
 }
 
 

@@ -1,3 +1,7 @@
+/** @file main.cpp
+ *  @author Pol Monroig
+ * */
+
 // load libraries
 #include "utils.h"
 #include "Manager/Manager.h"
@@ -14,7 +18,10 @@ int main(int argc, char* argv[]){
         if(argc < 4)EmptyEntry();
         bool default_c = true;
         if(argc == 5){
-            if(argv[4] == "manual")default_c = false;
+            std::string cmp_string = argv[4];
+            if(cmp_string == "--manual"){
+                default_c = false;
+            }
         }
         mlm::CreateProject(argv[2], argv[3], default_c);
     }
@@ -26,12 +33,13 @@ int main(int argc, char* argv[]){
         if(argc != 3)EmptyEntry();
         mlm::DisplayVersioning(argv[2]);
     }
-    else if(argument == "verify"){
-        mlm::Verify();
-    }
     else if(argument == "pull"){
-        //if(argc != 3)EmptyEntry();
-        mlm::PullFiles("models");
+        if(argc < 3)EmptyEntry();
+        bool force = false;
+        if(argc == 4){
+            if(argv[4] == "--force")force = true;
+        }
+        mlm::PullFiles(argument, false);
     }
     else{
         EmptyEntry();
