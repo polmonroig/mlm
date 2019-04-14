@@ -35,11 +35,30 @@ int main(int argc, char* argv[]){
     }
     else if(argument == "pull"){
         if(argc < 3)EmptyEntry();
-        bool force = false;
-        if(argc == 4){
-            if(argv[4] == "--force")force = true;
+        std::string cmp_string = argv[2];
+        if(cmp_string == "model"){
+            if(argc < 4)EmptyEntry();
+            if(argc == 5){
+                std::string s = argv[4];
+                // check if input is integer
+                for(char const& c : s){
+                    if(!isdigit(c))EmptyEntry();
+                }
+                mlm::PullModel(argv[3], std::stoi(s));
+            }
+            else {
+                mlm::PullModel(argv[3], -1);
+            }
+
         }
-        mlm::PullFiles(argument, false);
+        else{
+            if(argc == 4){
+                if(argv[4] == "--force") {
+                    mlm::PullFiles(argument, true);
+                }
+            }
+            mlm::PullFiles(argument, false);
+        }
     }
     else{
         EmptyEntry();

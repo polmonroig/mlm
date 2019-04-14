@@ -1,9 +1,4 @@
-"""
-__author__ = "Pol Monroig"
-__copyright__ = "Copyright 2019, mlm"
-__license__ = "Apache"
-__version__ = "0.0.9.5"
-"""
+
 
 # load required libraries
 from sklearn.externals import joblib

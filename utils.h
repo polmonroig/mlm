@@ -15,13 +15,15 @@
 #include <string>
 
 
-///@brief Version
+/** @brief MLPM Version
+ * */
 void Version(){
     std::cout << "ML Project Manager 0.0.9.5" << std::endl;
     exit(EXIT_SUCCESS);
 }
 
-
+/** @brief Writes help messages on screen
+ * */
 void Help(std::string const& exec_dir){
     std::string dir = "";
     auto i = exec_dir.size() - 1;

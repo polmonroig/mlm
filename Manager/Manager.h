@@ -92,7 +92,9 @@ namespace mlm{
     std::string TimetoString(std::time_t t);
     void PullFiles(std::string const &file_type, bool force);
     void PullModels();
+    void PullModel(std::string const &model_name, int version);
     std::list<fileType> GetSavedModels(std::string const& path);
+    void CopyModel(std::string const& name, int version, std::string const& model_time);
 
 
 

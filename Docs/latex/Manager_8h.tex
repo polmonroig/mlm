@@ -1,0 +1,159 @@
+\hypertarget{Manager_8h}{}\section{Manager/\+Manager.h File Reference}
+\label{Manager_8h}\index{Manager/\+Manager.\+h@{Manager/\+Manager.\+h}}
+
+
+\mbox{\hyperlink{namespaceThis}{This}} is the Manager header, it defines all the functions that create the interaction with the user.  
+
+
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$boost/filesystem.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/range/iterator\+\_\+range.\+hpp$>$}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmlm_1_1fileType}{mlm\+::file\+Type}}
+\end{DoxyCompactItemize}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespaceThis}{This}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{namespaceThis}{This}} namespace saves all the procedures used by the mlm application, it also includes some global functions that are loaded when the program starts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Manager_8h_ad3403f174a7be282e24dd51895067968}\label{Manager_8h_ad3403f174a7be282e24dd51895067968}} 
+\#define {\bfseries C\+O\+N\+F\+I\+G\+\_\+\+D\+IR}~\char`\"{}.mlmconfig\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_a03d0e6025143c64805bc89453f6395f4}\label{Manager_8h_a03d0e6025143c64805bc89453f6395f4}} 
+\#define {\bfseries C\+O\+N\+F\+I\+G\+\_\+\+L\+EN}~10
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Manager_8h_a99c5ec9aacfca3760d92e760abfd82aa}\label{Manager_8h_a99c5ec9aacfca3760d92e760abfd82aa}} 
+void {\bfseries mlm\+::\+Create\+Project} (std\+::string const \&name, std\+::string const \&dir, bool default\+\_\+config)
+\item 
+\mbox{\Hypertarget{Manager_8h_a68835e331da902afbc67f55a3036ce2d}\label{Manager_8h_a68835e331da902afbc67f55a3036ce2d}} 
+void {\bfseries mlm\+::\+Push\+Files} (std\+::string const \&file\+\_\+type)
+\item 
+\mbox{\Hypertarget{Manager_8h_ac227248c6dad6c2c46f5d72e42140d69}\label{Manager_8h_ac227248c6dad6c2c46f5d72e42140d69}} 
+void {\bfseries mlm\+::\+Generate\+Config} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_ac4e5fd55f7a10778ef7b1d3cdc321331}\label{Manager_8h_ac4e5fd55f7a10778ef7b1d3cdc321331}} 
+void {\bfseries mlm\+::\+Error\+And\+Exit} (std\+::string const \&error)
+\item 
+\mbox{\Hypertarget{Manager_8h_abc6c7b9c91666df4db2bbe66bcc8520f}\label{Manager_8h_abc6c7b9c91666df4db2bbe66bcc8520f}} 
+void {\bfseries mlm\+::\+Create\+Dir} (std\+::string const \&dir)
+\item 
+\mbox{\Hypertarget{Manager_8h_a91e9e79cd8ec64caf713377a900acec4}\label{Manager_8h_a91e9e79cd8ec64caf713377a900acec4}} 
+void {\bfseries mlm\+::\+Save\+Globals} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_a794a567144331ef68a76bbffcaebb23e}\label{Manager_8h_a794a567144331ef68a76bbffcaebb23e}} 
+void {\bfseries mlm\+::\+Load\+Globals} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_a75a2f031d5730089651b2009b76f6b3d}\label{Manager_8h_a75a2f031d5730089651b2009b76f6b3d}} 
+void {\bfseries mlm\+::\+Configure} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_a2479e1311fac66b7c4040f8c95393195}\label{Manager_8h_a2479e1311fac66b7c4040f8c95393195}} 
+void {\bfseries mlm\+::\+Write\+Header} (fs\+::ofstream \&file)
+\item 
+\mbox{\Hypertarget{Manager_8h_a29b72028971c54b654ec2852fd95e1f9}\label{Manager_8h_a29b72028971c54b654ec2852fd95e1f9}} 
+void {\bfseries mlm\+::\+Create\+Config\+File} (std\+::string const \&path, std\+::string const \&content=\char`\"{}\char`\"{})
+\item 
+\mbox{\Hypertarget{Manager_8h_a8e849075a7b5be3a544f13d6330a4b07}\label{Manager_8h_a8e849075a7b5be3a544f13d6330a4b07}} 
+void {\bfseries mlm\+::\+Display\+Versioning} (std\+::string const \&file\+\_\+type)
+\item 
+\mbox{\Hypertarget{Manager_8h_a25682986260a945e6d0693bcff5ae7fd}\label{Manager_8h_a25682986260a945e6d0693bcff5ae7fd}} 
+void {\bfseries mlm\+::\+Push\+Models} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_afcb68a79f01929fd876415a6d501da7e}\label{Manager_8h_afcb68a79f01929fd876415a6d501da7e}} 
+void {\bfseries mlm\+::\+Set\+Model\+Version} (int v)
+\item 
+\mbox{\Hypertarget{Manager_8h_a83ffb0aa3e0b11bc0bedf7213fd9d859}\label{Manager_8h_a83ffb0aa3e0b11bc0bedf7213fd9d859}} 
+void {\bfseries mlm\+::\+Add\+Model} (std\+::string const \&source\+\_\+path, std\+::string const \&model\+\_\+name, int model\+\_\+version)
+\item 
+\mbox{\Hypertarget{Manager_8h_a642c9c6f568a7faf5b14558678a85662}\label{Manager_8h_a642c9c6f568a7faf5b14558678a85662}} 
+std\+::set$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Files} (std\+::string const \&path)
+\item 
+\mbox{\Hypertarget{Manager_8h_a2f0ff65f0ef9855ab83fc2866291e06e}\label{Manager_8h_a2f0ff65f0ef9855ab83fc2866291e06e}} 
+std\+::list$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Info\+Files} (std\+::string const \&path)
+\item 
+\mbox{\Hypertarget{Manager_8h_aea15e59ba4d173999e421ef27c97cff7}\label{Manager_8h_aea15e59ba4d173999e421ef27c97cff7}} 
+void {\bfseries mlm\+::\+Update\+Info\+Files} (std\+::set$<$ file\+Type $>$ const \&files, std\+::list$<$ file\+Type $>$ \&info\+\_\+files)
+\item 
+\mbox{\Hypertarget{Manager_8h_a5cf15b46d858778a1cfcc8905de90782}\label{Manager_8h_a5cf15b46d858778a1cfcc8905de90782}} 
+void {\bfseries mlm\+::\+Save\+Files\+To\+Info} (std\+::list$<$ file\+Type $>$ const \&files, std\+::string const \&path)
+\item 
+\mbox{\Hypertarget{Manager_8h_ad0f07225bafd56dec9570f2b18a2cc0b}\label{Manager_8h_ad0f07225bafd56dec9570f2b18a2cc0b}} 
+std\+::string {\bfseries mlm\+::\+Timeto\+String} (std\+::time\+\_\+t t)
+\item 
+\mbox{\Hypertarget{Manager_8h_a9da3943732b60181527a87eb67fe5cae}\label{Manager_8h_a9da3943732b60181527a87eb67fe5cae}} 
+std\+::string {\bfseries mlm\+::\+Join\+Paths} (std\+::string const \&p1, std\+::string const \&p2)
+\item 
+\mbox{\Hypertarget{Manager_8h_a8539e8bd2e0213ae3a8eeb3dedf9f1df}\label{Manager_8h_a8539e8bd2e0213ae3a8eeb3dedf9f1df}} 
+void {\bfseries mlm\+::\+Verify} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_adefd2b740c344e138a4615c47ac3bea4}\label{Manager_8h_adefd2b740c344e138a4615c47ac3bea4}} 
+void {\bfseries mlm\+::\+Pull\+Files} (std\+::string const \&file\+\_\+type, bool force)
+\item 
+\mbox{\Hypertarget{Manager_8h_acbfaeb431d552dbb5b38cdf35f3c4e1e}\label{Manager_8h_acbfaeb431d552dbb5b38cdf35f3c4e1e}} 
+void {\bfseries mlm\+::\+Pull\+Models} ()
+\item 
+\mbox{\Hypertarget{Manager_8h_a7e5335d56536117373d3d70d7bee0aca}\label{Manager_8h_a7e5335d56536117373d3d70d7bee0aca}} 
+std\+::list$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Saved\+Models} (std\+::string const \&path)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{Manager_8h_aee756fe1829a2af57f9f355c5f0b8b64}\label{Manager_8h_aee756fe1829a2af57f9f355c5f0b8b64}} 
+std\+::string {\bfseries mlm\+::project\+\_\+name}
+\item 
+\mbox{\Hypertarget{Manager_8h_a6cc713ef34723bb1c8ba49e1c53a501a}\label{Manager_8h_a6cc713ef34723bb1c8ba49e1c53a501a}} 
+std\+::string {\bfseries mlm\+::project\+\_\+path}
+\item 
+\mbox{\Hypertarget{Manager_8h_a361d0ba340ac9a12b8336288a59554b5}\label{Manager_8h_a361d0ba340ac9a12b8336288a59554b5}} 
+std\+::string {\bfseries mlm\+::backup\+\_\+path}
+\item 
+\mbox{\Hypertarget{Manager_8h_ad47c4cd8f3caf340ee8206e79c50fba2}\label{Manager_8h_ad47c4cd8f3caf340ee8206e79c50fba2}} 
+std\+::string {\bfseries mlm\+::config}
+\item 
+\mbox{\Hypertarget{Manager_8h_a12b2ef7be085e99d74d7dd86be85a549}\label{Manager_8h_a12b2ef7be085e99d74d7dd86be85a549}} 
+bool {\bfseries mlm\+::default\+\_\+config}
+\item 
+\mbox{\Hypertarget{Manager_8h_aa2dab6dc3be65449e7e08fdfc46e35c9}\label{Manager_8h_aa2dab6dc3be65449e7e08fdfc46e35c9}} 
+bool {\bfseries mlm\+::force\+\_\+overwrite}
+\item 
+\mbox{\Hypertarget{Manager_8h_a2db81026a97bae48420441bbdf348f51}\label{Manager_8h_a2db81026a97bae48420441bbdf348f51}} 
+std\+::string const {\bfseries mlm\+::\+M\+O\+D\+E\+LS} = \char`\"{}models\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_a5257b9fdd666c44be12d500b7dbeab2f}\label{Manager_8h_a5257b9fdd666c44be12d500b7dbeab2f}} 
+std\+::string const {\bfseries mlm\+::\+D\+A\+TA} = \char`\"{}data\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_a148d63d7f5644c58b7cd707e9185bb84}\label{Manager_8h_a148d63d7f5644c58b7cd707e9185bb84}} 
+std\+::string const {\bfseries mlm\+::\+A\+LL} = \char`\"{}all\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_a63a68ac942ea02966ea302cd4df43de3}\label{Manager_8h_a63a68ac942ea02966ea302cd4df43de3}} 
+std\+::string const {\bfseries mlm\+::\+M\+O\+D\+E\+L\+S\+\_\+\+D\+IR} = \char`\"{}models/\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_abc598e2993d4e528db5c8a5a3e6151d1}\label{Manager_8h_abc598e2993d4e528db5c8a5a3e6151d1}} 
+std\+::string const {\bfseries mlm\+::\+D\+A\+T\+A\+\_\+\+D\+IR} = \char`\"{}data/\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_ace5888bdbfc2778d436540b5f5ecd058}\label{Manager_8h_ace5888bdbfc2778d436540b5f5ecd058}} 
+std\+::string const {\bfseries mlm\+::\+T\+R\+A\+I\+N\+\_\+\+D\+IR} = \char`\"{}data/train/\char`\"{}
+\item 
+\mbox{\Hypertarget{Manager_8h_a7b783c33cac71cf8406949443e182dd5}\label{Manager_8h_a7b783c33cac71cf8406949443e182dd5}} 
+std\+::string const {\bfseries mlm\+::\+T\+E\+S\+T\+\_\+\+D\+IR} = \char`\"{}data/test/\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\mbox{\hyperlink{namespaceThis}{This}} is the Manager header, it defines all the functions that create the interaction with the user. 
+
