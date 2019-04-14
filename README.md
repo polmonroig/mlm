@@ -9,9 +9,8 @@ python script. mlmpy does not work at all without the C++ package.
 
 ### mlmpy  installation ###
 
-To install mlmpy use:
     pip install mlmpy
-
+    
 ### Prerequisites ###
 
     C++ >= 17
