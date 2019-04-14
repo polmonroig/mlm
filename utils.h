@@ -18,7 +18,7 @@
 /** @brief MLPM Version
  * */
 void Version(){
-    std::cout << "ML Project Manager 0.0.9.5" << std::endl;
+    std::cout << "ML Project Manager 0.1.0.0" << std::endl;
     exit(EXIT_SUCCESS);
 }
 

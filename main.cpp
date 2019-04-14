@@ -52,12 +52,14 @@ int main(int argc, char* argv[]){
 
         }
         else{
+            std::string s = argv[2];
             if(argc == 4){
-                if(argv[4] == "--force") {
-                    mlm::PullFiles(argument, true);
+                std::string cmp_arg = argv[3];
+                if(cmp_string == "--force") {
+                    mlm::PullFiles(s, true);
                 }
             }
-            mlm::PullFiles(argument, false);
+            mlm::PullFiles(s, false);
         }
     }
     else{

@@ -38,78 +38,62 @@ struct \mbox{\hyperlink{structmlm_1_1fileType}{mlm\+::file\+Type}}
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{Manager_8h_a99c5ec9aacfca3760d92e760abfd82aa}\label{Manager_8h_a99c5ec9aacfca3760d92e760abfd82aa}} 
-void {\bfseries mlm\+::\+Create\+Project} (std\+::string const \&name, std\+::string const \&dir, bool default\+\_\+config)
-\item 
-\mbox{\Hypertarget{Manager_8h_a68835e331da902afbc67f55a3036ce2d}\label{Manager_8h_a68835e331da902afbc67f55a3036ce2d}} 
-void {\bfseries mlm\+::\+Push\+Files} (std\+::string const \&file\+\_\+type)
-\item 
+void \mbox{\hyperlink{Manager_8h_a99c5ec9aacfca3760d92e760abfd82aa}{mlm\+::\+Create\+Project}} (std\+::string const \&name, std\+::string const \&dir, bool default\+\_\+config)
+\begin{DoxyCompactList}\small\item\em Create a new project folder and its configuration. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{Manager_8h_a9da3943732b60181527a87eb67fe5cae}{mlm\+::\+Join\+Paths}} (std\+::string const \&p1, std\+::string const \&p2)
+\begin{DoxyCompactList}\small\item\em Join two paths. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a68835e331da902afbc67f55a3036ce2d}{mlm\+::\+Push\+Files}} (std\+::string const \&file\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Push files of a specific type to the backup dir. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_ac227248c6dad6c2c46f5d72e42140d69}\label{Manager_8h_ac227248c6dad6c2c46f5d72e42140d69}} 
-void {\bfseries mlm\+::\+Generate\+Config} ()
-\item 
-\mbox{\Hypertarget{Manager_8h_ac4e5fd55f7a10778ef7b1d3cdc321331}\label{Manager_8h_ac4e5fd55f7a10778ef7b1d3cdc321331}} 
-void {\bfseries mlm\+::\+Error\+And\+Exit} (std\+::string const \&error)
-\item 
-\mbox{\Hypertarget{Manager_8h_abc6c7b9c91666df4db2bbe66bcc8520f}\label{Manager_8h_abc6c7b9c91666df4db2bbe66bcc8520f}} 
-void {\bfseries mlm\+::\+Create\+Dir} (std\+::string const \&dir)
-\item 
+void \mbox{\hyperlink{Manager_8h_ac227248c6dad6c2c46f5d72e42140d69}{mlm\+::\+Generate\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Generates the basic configuration files and folders for a new project based on the current configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_ac4e5fd55f7a10778ef7b1d3cdc321331}{mlm\+::\+Error\+And\+Exit}} (std\+::string const \&error)
+\begin{DoxyCompactList}\small\item\em Prints an error message to screen and exits the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_abc6c7b9c91666df4db2bbe66bcc8520f}{mlm\+::\+Create\+Dir}} (std\+::string const \&dir)
+\begin{DoxyCompactList}\small\item\em Create a new folder. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_a91e9e79cd8ec64caf713377a900acec4}\label{Manager_8h_a91e9e79cd8ec64caf713377a900acec4}} 
-void {\bfseries mlm\+::\+Save\+Globals} ()
-\item 
+void \mbox{\hyperlink{Manager_8h_a91e9e79cd8ec64caf713377a900acec4}{mlm\+::\+Save\+Globals}} ()
+\begin{DoxyCompactList}\small\item\em Saves the basic project variables to C\+O\+N\+F\+I\+G\+\_\+\+D\+I\+R/info. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_a794a567144331ef68a76bbffcaebb23e}\label{Manager_8h_a794a567144331ef68a76bbffcaebb23e}} 
-void {\bfseries mlm\+::\+Load\+Globals} ()
-\item 
+void \mbox{\hyperlink{Manager_8h_a794a567144331ef68a76bbffcaebb23e}{mlm\+::\+Load\+Globals}} ()
+\begin{DoxyCompactList}\small\item\em Loads the basic project variables. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_a75a2f031d5730089651b2009b76f6b3d}\label{Manager_8h_a75a2f031d5730089651b2009b76f6b3d}} 
-void {\bfseries mlm\+::\+Configure} ()
-\item 
-\mbox{\Hypertarget{Manager_8h_a2479e1311fac66b7c4040f8c95393195}\label{Manager_8h_a2479e1311fac66b7c4040f8c95393195}} 
-void {\bfseries mlm\+::\+Write\+Header} (fs\+::ofstream \&file)
-\item 
-\mbox{\Hypertarget{Manager_8h_a29b72028971c54b654ec2852fd95e1f9}\label{Manager_8h_a29b72028971c54b654ec2852fd95e1f9}} 
-void {\bfseries mlm\+::\+Create\+Config\+File} (std\+::string const \&path, std\+::string const \&content=\char`\"{}\char`\"{})
-\item 
-\mbox{\Hypertarget{Manager_8h_a8e849075a7b5be3a544f13d6330a4b07}\label{Manager_8h_a8e849075a7b5be3a544f13d6330a4b07}} 
-void {\bfseries mlm\+::\+Display\+Versioning} (std\+::string const \&file\+\_\+type)
-\item 
+void \mbox{\hyperlink{Manager_8h_a75a2f031d5730089651b2009b76f6b3d}{mlm\+::\+Configure}} ()
+\begin{DoxyCompactList}\small\item\em Sets some parameters of the project configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a2479e1311fac66b7c4040f8c95393195}{mlm\+::\+Write\+Header}} (fs\+::ofstream \&file)
+\begin{DoxyCompactList}\small\item\em Writes a header to a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a29b72028971c54b654ec2852fd95e1f9}{mlm\+::\+Create\+Config\+File}} (std\+::string const \&path, std\+::string const \&content=\char`\"{}\char`\"{})
+\begin{DoxyCompactList}\small\item\em Creates a configuration file with an additional content. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a8e849075a7b5be3a544f13d6330a4b07}{mlm\+::\+Display\+Versioning}} (std\+::string const \&file\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Displays the files of a specific type with their last modification date and their version. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_a25682986260a945e6d0693bcff5ae7fd}\label{Manager_8h_a25682986260a945e6d0693bcff5ae7fd}} 
-void {\bfseries mlm\+::\+Push\+Models} ()
-\item 
-\mbox{\Hypertarget{Manager_8h_afcb68a79f01929fd876415a6d501da7e}\label{Manager_8h_afcb68a79f01929fd876415a6d501da7e}} 
-void {\bfseries mlm\+::\+Set\+Model\+Version} (int v)
-\item 
-\mbox{\Hypertarget{Manager_8h_a83ffb0aa3e0b11bc0bedf7213fd9d859}\label{Manager_8h_a83ffb0aa3e0b11bc0bedf7213fd9d859}} 
-void {\bfseries mlm\+::\+Add\+Model} (std\+::string const \&source\+\_\+path, std\+::string const \&model\+\_\+name, int model\+\_\+version)
-\item 
-\mbox{\Hypertarget{Manager_8h_a642c9c6f568a7faf5b14558678a85662}\label{Manager_8h_a642c9c6f568a7faf5b14558678a85662}} 
-std\+::set$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Files} (std\+::string const \&path)
-\item 
-\mbox{\Hypertarget{Manager_8h_a2f0ff65f0ef9855ab83fc2866291e06e}\label{Manager_8h_a2f0ff65f0ef9855ab83fc2866291e06e}} 
-std\+::list$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Info\+Files} (std\+::string const \&path)
-\item 
-\mbox{\Hypertarget{Manager_8h_aea15e59ba4d173999e421ef27c97cff7}\label{Manager_8h_aea15e59ba4d173999e421ef27c97cff7}} 
-void {\bfseries mlm\+::\+Update\+Info\+Files} (std\+::set$<$ file\+Type $>$ const \&files, std\+::list$<$ file\+Type $>$ \&info\+\_\+files)
-\item 
-\mbox{\Hypertarget{Manager_8h_a5cf15b46d858778a1cfcc8905de90782}\label{Manager_8h_a5cf15b46d858778a1cfcc8905de90782}} 
-void {\bfseries mlm\+::\+Save\+Files\+To\+Info} (std\+::list$<$ file\+Type $>$ const \&files, std\+::string const \&path)
-\item 
-\mbox{\Hypertarget{Manager_8h_ad0f07225bafd56dec9570f2b18a2cc0b}\label{Manager_8h_ad0f07225bafd56dec9570f2b18a2cc0b}} 
-std\+::string {\bfseries mlm\+::\+Timeto\+String} (std\+::time\+\_\+t t)
-\item 
-\mbox{\Hypertarget{Manager_8h_a9da3943732b60181527a87eb67fe5cae}\label{Manager_8h_a9da3943732b60181527a87eb67fe5cae}} 
-std\+::string {\bfseries mlm\+::\+Join\+Paths} (std\+::string const \&p1, std\+::string const \&p2)
-\item 
-\mbox{\Hypertarget{Manager_8h_a8539e8bd2e0213ae3a8eeb3dedf9f1df}\label{Manager_8h_a8539e8bd2e0213ae3a8eeb3dedf9f1df}} 
-void {\bfseries mlm\+::\+Verify} ()
-\item 
-\mbox{\Hypertarget{Manager_8h_adefd2b740c344e138a4615c47ac3bea4}\label{Manager_8h_adefd2b740c344e138a4615c47ac3bea4}} 
-void {\bfseries mlm\+::\+Pull\+Files} (std\+::string const \&file\+\_\+type, bool force)
-\item 
+void \mbox{\hyperlink{Manager_8h_a25682986260a945e6d0693bcff5ae7fd}{mlm\+::\+Push\+Models}} ()
+\begin{DoxyCompactList}\small\item\em Pushes all the models from the project directory to the backup directory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_afcb68a79f01929fd876415a6d501da7e}{mlm\+::\+Set\+Model\+Version}} (int v)
+\begin{DoxyCompactList}\small\item\em Sets the latest model a all the models to the project configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a83ffb0aa3e0b11bc0bedf7213fd9d859}{mlm\+::\+Add\+Model}} (std\+::string const \&source\+\_\+path, std\+::string const \&model\+\_\+name, int model\+\_\+version)
+\begin{DoxyCompactList}\small\item\em Moves a model from a specific path to the backup based on its version. \end{DoxyCompactList}\item 
+std\+::set$<$ file\+Type $>$ \mbox{\hyperlink{Manager_8h_a642c9c6f568a7faf5b14558678a85662}{mlm\+::\+Get\+Files}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em Collects all the files of a specific directory. \end{DoxyCompactList}\item 
+std\+::list$<$ file\+Type $>$ \mbox{\hyperlink{Manager_8h_a2f0ff65f0ef9855ab83fc2866291e06e}{mlm\+::\+Get\+Info\+Files}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em Collects all the files from a info file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_aea15e59ba4d173999e421ef27c97cff7}{mlm\+::\+Update\+Info\+Files}} (std\+::set$<$ file\+Type $>$ const \&files, std\+::list$<$ file\+Type $>$ \&info\+\_\+files)
+\begin{DoxyCompactList}\small\item\em Adds files from a location to the backup directory, thus updating the backup models. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a5cf15b46d858778a1cfcc8905de90782}{mlm\+::\+Save\+Files\+To\+Info}} (std\+::list$<$ file\+Type $>$ const \&files, std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em Saves a list fo files to an info file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{Manager_8h_ad0f07225bafd56dec9570f2b18a2cc0b}{mlm\+::\+Timeto\+String}} (std\+::time\+\_\+t t)
+\begin{DoxyCompactList}\small\item\em Converts a time variable to a string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_adefd2b740c344e138a4615c47ac3bea4}{mlm\+::\+Pull\+Files}} (std\+::string const \&file\+\_\+type, bool force)
+\begin{DoxyCompactList}\small\item\em Copies files of a specific type from backup to the project. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{Manager_8h_acbfaeb431d552dbb5b38cdf35f3c4e1e}\label{Manager_8h_acbfaeb431d552dbb5b38cdf35f3c4e1e}} 
-void {\bfseries mlm\+::\+Pull\+Models} ()
-\item 
-\mbox{\Hypertarget{Manager_8h_a7e5335d56536117373d3d70d7bee0aca}\label{Manager_8h_a7e5335d56536117373d3d70d7bee0aca}} 
-std\+::list$<$ file\+Type $>$ {\bfseries mlm\+::\+Get\+Saved\+Models} (std\+::string const \&path)
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{Manager_8h_acbfaeb431d552dbb5b38cdf35f3c4e1e}{mlm\+::\+Pull\+Models}} ()
+\begin{DoxyCompactList}\small\item\em Copies the models from backup to the project directory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a5075bf9f5df7e45da6fd00e0927a2996}{mlm\+::\+Pull\+Model}} (std\+::string const \&model\+\_\+name, int version)
+\begin{DoxyCompactList}\small\item\em Copies a specific model with a specific version from backup to the project directory; if version == -\/1 then copy latest version. \end{DoxyCompactList}\item 
+std\+::list$<$ file\+Type $>$ \mbox{\hyperlink{Manager_8h_a7e5335d56536117373d3d70d7bee0aca}{mlm\+::\+Get\+Saved\+Models}} (std\+::string const \&path)
+\begin{DoxyCompactList}\small\item\em Collects the models from backup with the latest version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{Manager_8h_a031e4e0f6aef23eece0cba1c69811212}{mlm\+::\+Copy\+Model}} (std\+::string const \&name, int version, std\+::string const \&model\+\_\+time)
+\begin{DoxyCompactList}\small\item\em Copies a model from backup to the project directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -157,3 +141,333 @@ std\+::string const {\bfseries mlm\+::\+T\+E\+S\+T\+\_\+\+D\+IR} = \char`\"{}dat
 \subsection{Detailed Description}
 \mbox{\hyperlink{namespaceThis}{This}} is the Manager header, it defines all the functions that create the interaction with the user. 
 
+\begin{DoxyAuthor}{Author}
+Pol Monroig 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{Manager_8h_file_a83ffb0aa3e0b11bc0bedf7213fd9d859}\label{Manager_8h_file_a83ffb0aa3e0b11bc0bedf7213fd9d859}} 
+\index{Manager.\+h@{Manager.\+h}!Add\+Model@{Add\+Model}}
+\index{Add\+Model@{Add\+Model}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Add\+Model()}{AddModel()}}
+{\footnotesize\ttfamily void mlm\+::\+Add\+Model (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{source\+\_\+path,  }\item[{std\+::string const \&}]{model\+\_\+name,  }\item[{int}]{model\+\_\+version }\end{DoxyParamCaption})}
+
+
+
+Moves a model from a specific path to the backup based on its version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+\_\+path} & the source path of the model including its name \\
+\hline
+{\em model\+\_\+name} & name of the model \\
+\hline
+{\em model\+\_\+version} & version of the model \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a031e4e0f6aef23eece0cba1c69811212}\label{Manager_8h_file_a031e4e0f6aef23eece0cba1c69811212}} 
+\index{Manager.\+h@{Manager.\+h}!Copy\+Model@{Copy\+Model}}
+\index{Copy\+Model@{Copy\+Model}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Copy\+Model()}{CopyModel()}}
+{\footnotesize\ttfamily void mlm\+::\+Copy\+Model (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{int}]{version,  }\item[{std\+::string const \&}]{model\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+Copies a model from backup to the project directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the model \\
+\hline
+{\em version} & version of the model \\
+\hline
+{\em model\+\_\+time} & last modified time of the model \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a29b72028971c54b654ec2852fd95e1f9}\label{Manager_8h_file_a29b72028971c54b654ec2852fd95e1f9}} 
+\index{Manager.\+h@{Manager.\+h}!Create\+Config\+File@{Create\+Config\+File}}
+\index{Create\+Config\+File@{Create\+Config\+File}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Create\+Config\+File()}{CreateConfigFile()}}
+{\footnotesize\ttfamily void mlm\+::\+Create\+Config\+File (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path,  }\item[{std\+::string const \&}]{content = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Creates a configuration file with an additional content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path for the new configuration file \\
+\hline
+{\em content} & content to append to the file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_abc6c7b9c91666df4db2bbe66bcc8520f}\label{Manager_8h_file_abc6c7b9c91666df4db2bbe66bcc8520f}} 
+\index{Manager.\+h@{Manager.\+h}!Create\+Dir@{Create\+Dir}}
+\index{Create\+Dir@{Create\+Dir}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Create\+Dir()}{CreateDir()}}
+{\footnotesize\ttfamily void mlm\+::\+Create\+Dir (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{dir }\end{DoxyParamCaption})}
+
+
+
+Create a new folder. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dir} & directory to create \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a99c5ec9aacfca3760d92e760abfd82aa}\label{Manager_8h_file_a99c5ec9aacfca3760d92e760abfd82aa}} 
+\index{Manager.\+h@{Manager.\+h}!Create\+Project@{Create\+Project}}
+\index{Create\+Project@{Create\+Project}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Create\+Project()}{CreateProject()}}
+{\footnotesize\ttfamily void mlm\+::\+Create\+Project (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{name,  }\item[{std\+::string const \&}]{dir,  }\item[{bool}]{default\+\_\+config }\end{DoxyParamCaption})}
+
+
+
+Create a new project folder and its configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & name of the project \\
+\hline
+{\em dir} & project directory \\
+\hline
+{\em default\+\_\+config} & use default configuration or manual \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a8e849075a7b5be3a544f13d6330a4b07}\label{Manager_8h_file_a8e849075a7b5be3a544f13d6330a4b07}} 
+\index{Manager.\+h@{Manager.\+h}!Display\+Versioning@{Display\+Versioning}}
+\index{Display\+Versioning@{Display\+Versioning}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Display\+Versioning()}{DisplayVersioning()}}
+{\footnotesize\ttfamily void mlm\+::\+Display\+Versioning (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Displays the files of a specific type with their last modification date and their version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+type} & type of the file to print \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_ac4e5fd55f7a10778ef7b1d3cdc321331}\label{Manager_8h_file_ac4e5fd55f7a10778ef7b1d3cdc321331}} 
+\index{Manager.\+h@{Manager.\+h}!Error\+And\+Exit@{Error\+And\+Exit}}
+\index{Error\+And\+Exit@{Error\+And\+Exit}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Error\+And\+Exit()}{ErrorAndExit()}}
+{\footnotesize\ttfamily void mlm\+::\+Error\+And\+Exit (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{error }\end{DoxyParamCaption})}
+
+
+
+Prints an error message to screen and exits the program. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & message to print \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a642c9c6f568a7faf5b14558678a85662}\label{Manager_8h_file_a642c9c6f568a7faf5b14558678a85662}} 
+\index{Manager.\+h@{Manager.\+h}!Get\+Files@{Get\+Files}}
+\index{Get\+Files@{Get\+Files}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Get\+Files()}{GetFiles()}}
+{\footnotesize\ttfamily std\+::set$<$ \mbox{\hyperlink{structmlm_1_1fileType}{mlm\+::file\+Type}} $>$ mlm\+::\+Get\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Collects all the files of a specific directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path of the files to collect \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+set of files 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Manager_8h_file_a2f0ff65f0ef9855ab83fc2866291e06e}\label{Manager_8h_file_a2f0ff65f0ef9855ab83fc2866291e06e}} 
+\index{Manager.\+h@{Manager.\+h}!Get\+Info\+Files@{Get\+Info\+Files}}
+\index{Get\+Info\+Files@{Get\+Info\+Files}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Get\+Info\+Files()}{GetInfoFiles()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{mlm\+::file\+Type}} $>$ mlm\+::\+Get\+Info\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Collects all the files from a info file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the info file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+list of files 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Manager_8h_file_a7e5335d56536117373d3d70d7bee0aca}\label{Manager_8h_file_a7e5335d56536117373d3d70d7bee0aca}} 
+\index{Manager.\+h@{Manager.\+h}!Get\+Saved\+Models@{Get\+Saved\+Models}}
+\index{Get\+Saved\+Models@{Get\+Saved\+Models}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Get\+Saved\+Models()}{GetSavedModels()}}
+{\footnotesize\ttfamily std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{mlm\+::file\+Type}} $>$ mlm\+::\+Get\+Saved\+Models (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Collects the models from backup with the latest version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & path to the info file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+list of models 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Manager_8h_file_a9da3943732b60181527a87eb67fe5cae}\label{Manager_8h_file_a9da3943732b60181527a87eb67fe5cae}} 
+\index{Manager.\+h@{Manager.\+h}!Join\+Paths@{Join\+Paths}}
+\index{Join\+Paths@{Join\+Paths}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Join\+Paths()}{JoinPaths()}}
+{\footnotesize\ttfamily std\+::string mlm\+::\+Join\+Paths (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{p1,  }\item[{std\+::string const \&}]{p2 }\end{DoxyParamCaption})}
+
+
+
+Join two paths. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & path 1 \\
+\hline
+{\em p2} & path 2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns a string with the path resulting from the join of p1 an p2 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Manager_8h_file_adefd2b740c344e138a4615c47ac3bea4}\label{Manager_8h_file_adefd2b740c344e138a4615c47ac3bea4}} 
+\index{Manager.\+h@{Manager.\+h}!Pull\+Files@{Pull\+Files}}
+\index{Pull\+Files@{Pull\+Files}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Pull\+Files()}{PullFiles()}}
+{\footnotesize\ttfamily void mlm\+::\+Pull\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file\+\_\+type,  }\item[{bool}]{force }\end{DoxyParamCaption})}
+
+
+
+Copies files of a specific type from backup to the project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+type} & type of the file to move \\
+\hline
+{\em force} & true to force overwrite files with the same name \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a5075bf9f5df7e45da6fd00e0927a2996}\label{Manager_8h_file_a5075bf9f5df7e45da6fd00e0927a2996}} 
+\index{Manager.\+h@{Manager.\+h}!Pull\+Model@{Pull\+Model}}
+\index{Pull\+Model@{Pull\+Model}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Pull\+Model()}{PullModel()}}
+{\footnotesize\ttfamily void mlm\+::\+Pull\+Model (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{model\+\_\+name,  }\item[{int}]{version }\end{DoxyParamCaption})}
+
+
+
+Copies a specific model with a specific version from backup to the project directory; if version == -\/1 then copy latest version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+\_\+name} & name of the model to copy \\
+\hline
+{\em version} & version of the model \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a68835e331da902afbc67f55a3036ce2d}\label{Manager_8h_file_a68835e331da902afbc67f55a3036ce2d}} 
+\index{Manager.\+h@{Manager.\+h}!Push\+Files@{Push\+Files}}
+\index{Push\+Files@{Push\+Files}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Push\+Files()}{PushFiles()}}
+{\footnotesize\ttfamily void mlm\+::\+Push\+Files (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{file\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+Push files of a specific type to the backup dir. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+type} & file type to push \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a5cf15b46d858778a1cfcc8905de90782}\label{Manager_8h_file_a5cf15b46d858778a1cfcc8905de90782}} 
+\index{Manager.\+h@{Manager.\+h}!Save\+Files\+To\+Info@{Save\+Files\+To\+Info}}
+\index{Save\+Files\+To\+Info@{Save\+Files\+To\+Info}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Save\+Files\+To\+Info()}{SaveFilesToInfo()}}
+{\footnotesize\ttfamily void mlm\+::\+Save\+Files\+To\+Info (\begin{DoxyParamCaption}\item[{std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{file\+Type}} $>$ const \&}]{files,  }\item[{std\+::string const \&}]{path }\end{DoxyParamCaption})}
+
+
+
+Saves a list fo files to an info file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em files} & files to save \\
+\hline
+{\em path} & location of the info file \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_afcb68a79f01929fd876415a6d501da7e}\label{Manager_8h_file_afcb68a79f01929fd876415a6d501da7e}} 
+\index{Manager.\+h@{Manager.\+h}!Set\+Model\+Version@{Set\+Model\+Version}}
+\index{Set\+Model\+Version@{Set\+Model\+Version}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Set\+Model\+Version()}{SetModelVersion()}}
+{\footnotesize\ttfamily void mlm\+::\+Set\+Model\+Version (\begin{DoxyParamCaption}\item[{int}]{v }\end{DoxyParamCaption})}
+
+
+
+Sets the latest model a all the models to the project configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & version to compare \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_ad0f07225bafd56dec9570f2b18a2cc0b}\label{Manager_8h_file_ad0f07225bafd56dec9570f2b18a2cc0b}} 
+\index{Manager.\+h@{Manager.\+h}!Timeto\+String@{Timeto\+String}}
+\index{Timeto\+String@{Timeto\+String}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Timeto\+String()}{TimetoString()}}
+{\footnotesize\ttfamily std\+::string mlm\+::\+Timeto\+String (\begin{DoxyParamCaption}\item[{std\+::time\+\_\+t}]{t }\end{DoxyParamCaption})}
+
+
+
+Converts a time variable to a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & time to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string of the t 
+\end{DoxyReturn}
+\mbox{\Hypertarget{Manager_8h_file_aea15e59ba4d173999e421ef27c97cff7}\label{Manager_8h_file_aea15e59ba4d173999e421ef27c97cff7}} 
+\index{Manager.\+h@{Manager.\+h}!Update\+Info\+Files@{Update\+Info\+Files}}
+\index{Update\+Info\+Files@{Update\+Info\+Files}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Update\+Info\+Files()}{UpdateInfoFiles()}}
+{\footnotesize\ttfamily void mlm\+::\+Update\+Info\+Files (\begin{DoxyParamCaption}\item[{std\+::set$<$ \mbox{\hyperlink{structmlm_1_1fileType}{file\+Type}} $>$ const \&}]{files,  }\item[{std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{file\+Type}} $>$ \&}]{info\+\_\+files }\end{DoxyParamCaption})}
+
+
+
+Adds files from a location to the backup directory, thus updating the backup models. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em files} & set of files to transfer \\
+\hline
+{\em info\+\_\+files} & list of files already in backup \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{Manager_8h_file_a2479e1311fac66b7c4040f8c95393195}\label{Manager_8h_file_a2479e1311fac66b7c4040f8c95393195}} 
+\index{Manager.\+h@{Manager.\+h}!Write\+Header@{Write\+Header}}
+\index{Write\+Header@{Write\+Header}!Manager.\+h@{Manager.\+h}}
+\subsubsection{\texorpdfstring{Write\+Header()}{WriteHeader()}}
+{\footnotesize\ttfamily void mlm\+::\+Write\+Header (\begin{DoxyParamCaption}\item[{fs\+::ofstream \&}]{file }\end{DoxyParamCaption})}
+
+
+
+Writes a header to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & file to write \\
+\hline
+\end{DoxyParams}
