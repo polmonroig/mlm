@@ -7,6 +7,11 @@ for the project manager. On the other hand the Python package mlmpy inside the p
 is an API that facilitates the use of mlm through python, this way you don't have to leave your notebook or
 python script. mlmpy does not work at all without the C++ package. 
 
+### mlmpy  installation ###
+
+To install mlmpy use:
+    pip install mlmpy
+
 ### Prerequisites ###
 
     C++ >= 17
