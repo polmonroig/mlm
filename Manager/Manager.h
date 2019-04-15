@@ -28,7 +28,7 @@ namespace fs = boost::filesystem;
 
 
 
-/** @namespace This is the Machine Learning Manager aka "mlm"
+/** @namespace mlm This is the Machine Learning Manager aka "mlm"
  *
  *  @brief This namespace saves all the procedures
  *         used by the mlm application, it also includes some global

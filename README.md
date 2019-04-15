@@ -1,16 +1,16 @@
 # mlm #
 
 This is the repository for my Machine Learning Project Manager.
-This application is divided into two parts. The C++ code, and the Python code. The C++ code is 
-the heart of the manager, it is self suficient and necessary for all the procceses required 
+This application is divided into two parts. The C++ code, and the Python code. The C++ code is
+the heart of the manager, it is self suficient and necessary for all the procceses required
 for the project manager. On the other hand the Python package mlmpy inside the python_manager folder
 is an API that facilitates the use of mlm through python, this way you don't have to leave your notebook or
-python script. mlmpy does not work at all without the C++ package. 
+python script. mlmpy does not work at all without the C++ package.
 
 ### mlmpy  installation ###
 
     pip install mlmpy
-    
+
 ### Prerequisites ###
 
     C++ >= 17
