@@ -26,8 +26,13 @@ int main(int argc, char* argv[]){
         mlm::CreateProject(argv[2], argv[3], default_c);
     }
     else if(argument == "push"){
-        if(argc != 3)EmptyEntry();
-        mlm::PushFiles(argv[2]);
+        if(argc < 3)EmptyEntry();
+        std::string cmp_string = argv[2];
+        if(cmp_string == "model"){
+            if(argc < 4)EmptyEntry();
+            mlm::PushModel(argv[3]);
+        }
+        else mlm::PushFiles(argv[2]);
     }
     else if(argument == "display"){
         if(argc != 3)EmptyEntry();
@@ -49,7 +54,6 @@ int main(int argc, char* argv[]){
             else {
                 mlm::PullModel(argv[3], -1);
             }
-
         }
         else{
             std::string s = argv[2];

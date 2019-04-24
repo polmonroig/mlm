@@ -180,7 +180,7 @@ namespace mlm{
      *  @param t: time to convert
      *  @return string of the t
      * */
-    std::string TimetoString(std::time_t t);
+    std::string TimeToString(std::time_t t);
 
     /** @brief Copies files of a specific type from backup to the project
      *  @param file_type: type of the file to move
@@ -199,6 +199,11 @@ namespace mlm{
      *  @param version: version of the model
      * */
     void PullModel(std::string const &model_name, int version);
+
+    /** @brief Pushed a model with the specified name
+     *  @param model_name: name of the model to backup
+     * */
+    void PushModel(std::string const& model_name);
 
     /** @brief Collects the models from backup with the latest version
      *  @param path: path to the info file

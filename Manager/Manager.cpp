@@ -228,7 +228,7 @@ void mlm::DisplayVersioning(std::string const& file_type){
     }
 }
 
-std::string mlm::TimetoString(std::time_t t){
+std::string mlm::TimeToString(std::time_t t){
     char buff[20];
     strftime(buff, 20, "%Y%m%d %H%M%S", localtime(&t));
     return buff;
@@ -257,8 +257,8 @@ void mlm::SetModelVersion(int v){
 std::set<mlm::fileType> mlm::GetFiles(std::string const& path){
     std::set<mlm::fileType> files;
     for(auto& entry : boost::make_iterator_range(fs::directory_iterator(path), {})){
-        auto time = boost::filesystem::last_write_time(entry);
-        files.insert(files.end(), fileType(entry.path().filename().string(), mlm::TimetoString(time), 1));
+        auto time = fs::last_write_time(entry);
+        files.insert(files.end(), fileType(entry.path().filename().string(), mlm::TimeToString(time), 1));
     }
     return files;
 }
@@ -292,6 +292,13 @@ void mlm::PullModel(std::string const &model_name, int version){
     }
     file.close();
     if(version > stoi(ver))ErrorAndExit("There isn't any model with the specified name and version");
+    auto current_model = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
+    current_model = mlm::JoinPaths(current_model, model_name);
+    if(fs::exists(current_model)){
+        if(mlm::TimeToString(fs::last_write_time(current_model)) > model_time){
+            ErrorAndExit("You currently have a newer version of the requested model, push to update");
+        }
+    }
     backup_models = mlm::JoinPaths(backup_models, ver);
     backup_models = mlm::JoinPaths(backup_models, model_name);
     if(!fs::exists(backup_models))ErrorAndExit("There isn't any model with the specified name and version");
@@ -519,3 +526,26 @@ void mlm::PullFiles(std::string const &file_type, bool force) {
     mlm::SaveGlobals();
 }
 
+
+
+void mlm::PushModel(std::string const& model_name){
+    mlm::LoadGlobals();
+    auto model_path = mlm::JoinPaths(mlm::project_path, MODELS_DIR);
+    model_path = mlm::JoinPaths(model_path, model_name);
+    if(!fs::exists(model_path)){
+        ErrorAndExit("The specified model doesn't exist in the models directory");
+    }
+
+    // next we need to load the saved models
+    auto models_backup = mlm::JoinPaths(mlm::backup_path, MODELS_DIR);
+    auto saved_files = mlm::GetInfoFiles(mlm::JoinPaths(models_backup, "info"));
+
+    std::set<fileType> files;
+    files.insert(fileType(model_name, mlm::TimeToString(fs::last_write_time(model_path)), 1));
+    // then add the models new models to the saved ones
+    mlm::UpdateInfoFiles(files, saved_files);
+
+    // save the models list to backup info file
+    mlm::SaveFilesToInfo(saved_files, mlm::JoinPaths(models_backup, "info"));
+
+}
