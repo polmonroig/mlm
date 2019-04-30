@@ -549,3 +549,8 @@ void mlm::PushModel(std::string const& model_name){
     mlm::SaveFilesToInfo(saved_files, mlm::JoinPaths(models_backup, "info"));
 
 }
+
+
+void mlm::RenameModel(std::string const &old_name, std::string const &new_name) {
+
+}

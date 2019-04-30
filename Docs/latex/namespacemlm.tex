@@ -56,7 +56,7 @@ void \mbox{\hyperlink{namespacemlm_aea15e59ba4d173999e421ef27c97cff7}{Update\+In
 \begin{DoxyCompactList}\small\item\em Adds files from a location to the backup directory, thus updating the backup models. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemlm_a5cf15b46d858778a1cfcc8905de90782}{Save\+Files\+To\+Info}} (std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{file\+Type}} $>$ const \&files, std\+::string const \&path)
 \begin{DoxyCompactList}\small\item\em Saves a list fo files to an info file. \end{DoxyCompactList}\item 
-std\+::string \mbox{\hyperlink{namespacemlm_ad0f07225bafd56dec9570f2b18a2cc0b}{Timeto\+String}} (std\+::time\+\_\+t t)
+std\+::string \mbox{\hyperlink{namespacemlm_aa61c46d574274a509c66bc8bb32fb14d}{Time\+To\+String}} (std\+::time\+\_\+t t)
 \begin{DoxyCompactList}\small\item\em Converts a time variable to a string. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemlm_adefd2b740c344e138a4615c47ac3bea4}{Pull\+Files}} (std\+::string const \&file\+\_\+type, bool force)
 \begin{DoxyCompactList}\small\item\em Copies files of a specific type from backup to the project. \end{DoxyCompactList}\item 
@@ -65,10 +65,14 @@ void \mbox{\hyperlink{namespacemlm_acbfaeb431d552dbb5b38cdf35f3c4e1e}{Pull\+Mode
 \begin{DoxyCompactList}\small\item\em Copies the models from backup to the project directory. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemlm_a5075bf9f5df7e45da6fd00e0927a2996}{Pull\+Model}} (std\+::string const \&model\+\_\+name, int version)
 \begin{DoxyCompactList}\small\item\em Copies a specific model with a specific version from backup to the project directory; if version == -\/1 then copy latest version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacemlm_ae55c31193af71d6e46896ba16e806e45}{Push\+Model}} (std\+::string const \&model\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Pushed a model with the specified name. \end{DoxyCompactList}\item 
 std\+::list$<$ \mbox{\hyperlink{structmlm_1_1fileType}{file\+Type}} $>$ \mbox{\hyperlink{namespacemlm_a7e5335d56536117373d3d70d7bee0aca}{Get\+Saved\+Models}} (std\+::string const \&path)
 \begin{DoxyCompactList}\small\item\em Collects the models from backup with the latest version. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespacemlm_a031e4e0f6aef23eece0cba1c69811212}{Copy\+Model}} (std\+::string const \&name, int version, std\+::string const \&model\+\_\+time)
-\begin{DoxyCompactList}\small\item\em Copies a model from backup to the project directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Copies a model from backup to the project directory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacemlm_a93971c6e67082f90b5696972b12dee89}{Rename\+Model}} (std\+::string const \&old\+\_\+name, std\+::string const \&new\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Rename a model inside the project. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -361,6 +365,38 @@ Push files of a specific type to the backup dir.
 {\em file\+\_\+type} & file type to push \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{namespacemlm_ae55c31193af71d6e46896ba16e806e45}\label{namespacemlm_ae55c31193af71d6e46896ba16e806e45}} 
+\index{mlm@{mlm}!Push\+Model@{Push\+Model}}
+\index{Push\+Model@{Push\+Model}!mlm@{mlm}}
+\subsubsection{\texorpdfstring{Push\+Model()}{PushModel()}}
+{\footnotesize\ttfamily void mlm\+::\+Push\+Model (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{model\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Pushed a model with the specified name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model\+\_\+name} & name of the model to backup \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacemlm_a93971c6e67082f90b5696972b12dee89}\label{namespacemlm_a93971c6e67082f90b5696972b12dee89}} 
+\index{mlm@{mlm}!Rename\+Model@{Rename\+Model}}
+\index{Rename\+Model@{Rename\+Model}!mlm@{mlm}}
+\subsubsection{\texorpdfstring{Rename\+Model()}{RenameModel()}}
+{\footnotesize\ttfamily void mlm\+::\+Rename\+Model (\begin{DoxyParamCaption}\item[{std\+::string const \&}]{old\+\_\+name,  }\item[{std\+::string const \&}]{new\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Rename a model inside the project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em old\+\_\+name} & the of the model to rename \\
+\hline
+{\em new\+\_\+name} & the new name of the model \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{namespacemlm_a5cf15b46d858778a1cfcc8905de90782}\label{namespacemlm_a5cf15b46d858778a1cfcc8905de90782}} 
 \index{mlm@{mlm}!Save\+Files\+To\+Info@{Save\+Files\+To\+Info}}
 \index{Save\+Files\+To\+Info@{Save\+Files\+To\+Info}!mlm@{mlm}}
@@ -393,11 +429,11 @@ Sets the latest model a all the models to the project configuration.
 {\em v} & version to compare \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespacemlm_ad0f07225bafd56dec9570f2b18a2cc0b}\label{namespacemlm_ad0f07225bafd56dec9570f2b18a2cc0b}} 
-\index{mlm@{mlm}!Timeto\+String@{Timeto\+String}}
-\index{Timeto\+String@{Timeto\+String}!mlm@{mlm}}
-\subsubsection{\texorpdfstring{Timeto\+String()}{TimetoString()}}
-{\footnotesize\ttfamily std\+::string mlm\+::\+Timeto\+String (\begin{DoxyParamCaption}\item[{std\+::time\+\_\+t}]{t }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{namespacemlm_aa61c46d574274a509c66bc8bb32fb14d}\label{namespacemlm_aa61c46d574274a509c66bc8bb32fb14d}} 
+\index{mlm@{mlm}!Time\+To\+String@{Time\+To\+String}}
+\index{Time\+To\+String@{Time\+To\+String}!mlm@{mlm}}
+\subsubsection{\texorpdfstring{Time\+To\+String()}{TimeToString()}}
+{\footnotesize\ttfamily std\+::string mlm\+::\+Time\+To\+String (\begin{DoxyParamCaption}\item[{std\+::time\+\_\+t}]{t }\end{DoxyParamCaption})}
 
 
 

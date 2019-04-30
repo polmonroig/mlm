@@ -218,6 +218,12 @@ namespace mlm{
      * */
     void CopyModel(std::string const& name, int version, std::string const& model_time);
 
+    /** @brief Rename a model inside the project
+     *  @param old_name: the of the model to rename
+     *  @param new_name: the new name of the model
+     * */
+    void RenameModel(std::string const& old_name, std::string const& new_name);
+
 
 
     // global variables

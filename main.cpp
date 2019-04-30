@@ -66,6 +66,10 @@ int main(int argc, char* argv[]){
             mlm::PullFiles(s, false);
         }
     }
+    else if(argument == "rename"){
+        if(argc < 4)EmptyEntry();
+        mlm::RenameModel(argv[2], argv[3]);
+    }
     else{
         EmptyEntry();
     }
